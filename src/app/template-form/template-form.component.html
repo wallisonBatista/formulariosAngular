@@ -19,7 +19,7 @@
         <div class="form-group row">
             <div class="col-md-3">
                 <label for="cep" class="control-label">CEP</label>
-                <input [ngClass]="aplicaCssErro(cep)" type="number" id="cep" name="cep" class="form-control" ngModel #cep="ngModel" required>
+                <input [ngClass]="aplicaCssErro(cep)" type="number" id="cep" name="cep" class="form-control" ngModel #cep="ngModel" required (blur)="consultaCEP($event.target.value)">
                 <app-campo-control-erro [mostrarErro]="verificaValidTouched(cep)" msgErro="CEP é obrigatório"></app-campo-control-erro>
             </div>
             <div class="col-md-3">
