@@ -9,8 +9,8 @@ import { map } from 'rxjs/operators';
 })
 export class TemplateFormComponent implements OnInit {
   usuario: any = {
-    nome: null,
-    email: null,
+    nome: '',
+    email: '',
   };
 
   onSubmit(form) {}
@@ -29,18 +29,43 @@ export class TemplateFormComponent implements OnInit {
     };
   }
 
-  consultaCEP(cep) {
+  consultaCEP(cep, form) {
     cep = cep.replace(/\D/g, '');
 
     if (cep != '') {
       var validacep = /^[0-9]{8}$/;
 
       if (validacep.test(cep)) {
+        this.resetaDadosForm(form);
         this.http
-          .get(`https://viacep.com.br/ws/${cep}/json`)
+          .get(`//viacep.com.br/ws/${cep}/json`)
           .pipe(map((dados) => dados))
-          .subscribe((dados) => console.log(dados));
+          .subscribe((dados) => this.populaDadosForm(dados, form));
       }
     }
+  }
+
+  populaDadosForm(dados, formulario) {
+    formulario.form.patchValue({
+      endereco: {
+        rua: dados.logradouro,
+        complemento: dados.complemento,
+        bairro: dados.bairro,
+        cidade: dados.localidade,
+        estado: dados.uf,
+      },
+    });
+  }
+
+  resetaDadosForm(formulario) {
+    formulario.form.patchValue({
+      endereco: {
+        rua: null,
+        complemento: null,
+        bairro: null,
+        cidade: null,
+        estado: null,
+      },
+    });
   }
 }
