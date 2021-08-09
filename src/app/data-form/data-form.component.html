@@ -3,14 +3,68 @@
         <div class="col-sm-12">
             <label for="nome">Nome</label>
         </div>
-        <div class="col-sm-12">
-            <input type="text" class="form-control" formControlName="nome" placeholder="Nome">
+        <div class="col-sm-12" >
+            <input [ngClass]="aplicaCssErro('nome')" type="text" class="form-control" formControlName="nome" placeholder="Nome">
         </div>
     </div>
+    <app-campo-control-erro [mostrarErro]="verificaValidTouched('nome')" msgErro="Nome é obrigatório"></app-campo-control-erro>
 
     <div class="form-group">
         <label for="email">Email</label>
-        <input type="email" id="email" class="form-control" formControlName="email" placeholder="nome@email.com" email>
+        <input [ngClass]="aplicaCssErro('email')" type="email" id="email" class="form-control" formControlName="email" placeholder="nome@email.com" email>
+    </div>
+    <app-campo-control-erro [mostrarErro]="verificaValidTouched('email')" msgErro="Email é obrigatório"></app-campo-control-erro>
+
+    <div>
+        <div class="form-group row">
+            <div class="col-md-3">
+                <label for="cep" class="control-label">CEP</label>
+                <input [ngClass]="aplicaCssErro('cep')" formControlName="cep" type="number" id="cep" name="cep" class="form-control">
+                <app-campo-control-erro [mostrarErro]="verificaValidTouched('cep')" msgErro="CEP é obrigatório"></app-campo-control-erro>
+            </div>
+            <div class="col-md-3">
+                <label for="numero" class="control-label">Número</label>
+                <input [ngClass]="aplicaCssErro('numero')" formControlName="numero" type="number" id="numero" class="form-control">
+                <app-campo-control-erro [mostrarErro]="verificaValidTouched('numero')" msgErro="Número é obrigatório"></app-campo-control-erro>
+            </div>
+
+            <div class="col-md-6">
+                <label for="complemento" class="control-label">Complemento</label>
+                <input formControlName="complemento" type="text" id="complemento" name="complemento" class="form-control">
+            </div>
+
+            <div>
+                <div class="col-sm-12">
+                    <label for="rua">Rua</label>
+                </div>
+                <div class="col-sm-12">
+                    <input [ngClass]="aplicaCssErro('rua')" formControlName="rua" type="text" class="form-control" name="rua" readonly>
+                    <app-campo-control-erro [mostrarErro]="verificaValidTouched('rua')" msgErro="Rua é obrigatório"></app-campo-control-erro>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-5">
+                <label for="bairro" class="control-label">Bairro</label>
+                <input [ngClass]="aplicaCssErro('bairro')" formControlName="bairro" type="text" id="bairro" name="bairro" class="form-control">
+                <app-campo-control-erro [mostrarErro]="verificaValidTouched('bairro')" msgErro="Bairro é obrigatório"></app-campo-control-erro>
+            </div>
+
+            <div class="col-md-4">
+                <label for="cidade" class="control-label">Cidade</label>
+                <input [ngClass]="aplicaCssErro('cidade')" formControlName="cidade" type="text" id="cidade" name="cidade" class="form-control">
+                <app-campo-control-erro [mostrarErro]="verificaValidTouched('cidade')" msgErro="Cidade é obrigatório"></app-campo-control-erro>
+            </div>
+
+            <div class="col-md-3">
+                <label for="estado" class="control-label">Estado</label>
+                <input [ngClass]="aplicaCssErro('estado')" formControlName="estado" type="text" id="estado" name="estado" class="form-control">
+                <app-campo-control-erro [mostrarErro]="verificaValidTouched('estado')" msgErro="Estado é obrigatório"></app-campo-control-erro>
+            </div>
+
+        </div>
+
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>

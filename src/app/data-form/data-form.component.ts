@@ -29,6 +29,13 @@ export class DataFormComponent implements OnInit {
         ],
       ],
       email: [null, [Validators.required, Validators.email]],
+      cep: [null, Validators.required],
+      numero: [null, Validators.required],
+      complemento: [null],
+      rua: [null, Validators.required],
+      bairro: [null, Validators.required],
+      cidade: [null, Validators.required],
+      estado: [null, Validators.required]
     });
   }
 
@@ -48,5 +55,15 @@ export class DataFormComponent implements OnInit {
   //reseta o form
   resetar() {
     this.formulario.reset();
+  }
+
+  verificaValidTouched(campo: string) {
+    return !this.formulario.get(campo).valid && this.formulario.get(campo).touched;
+  }
+
+  aplicaCssErro(campo: string) {
+    return {
+      'alert alert-danger': this.verificaValidTouched(campo),
+    }
   }
 }
