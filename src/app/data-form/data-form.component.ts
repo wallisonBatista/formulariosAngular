@@ -44,7 +44,9 @@ export class DataFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.http
+
+    if (this.formulario.valid) {
+      this.http
       .post('https://httpbin.org/post', JSON.stringify(this.formulario.value))
       .subscribe(
         (dados) => {
@@ -52,6 +54,21 @@ export class DataFormComponent implements OnInit {
         },
         (error: any) => alert('erro')
       );
+    } else {
+      console.log('f invalid');
+      this.verificaValidacoesForm(this.formulario)
+    }
+
+  }
+
+  verificaValidacoesForm(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach(campo => {
+      const controle = formGroup.get(campo);
+      controle.markAsTouched();
+      if (controle instanceof FormGroup) {
+        this.verificaValidacoesForm(controle)
+      }
+    }); 
   }
 
   //reseta o form
