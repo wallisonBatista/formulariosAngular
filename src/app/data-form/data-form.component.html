@@ -15,17 +15,18 @@
     </div>
     <app-campo-control-erro [mostrarErro]="verificaValidTouched('email')" msgErro="Email é obrigatório"></app-campo-control-erro>
 
-    <div>
+    <div formGroupName="endereco">
         <div class="form-group row">
             <div class="col-md-3">
                 <label for="cep" class="control-label">CEP</label>
-                <input [ngClass]="aplicaCssErro('cep')" formControlName="cep" type="number" id="cep" name="cep" class="form-control">
-                <app-campo-control-erro [mostrarErro]="verificaValidTouched('cep')" msgErro="CEP é obrigatório"></app-campo-control-erro>
+                <input [ngClass]="aplicaCssErro('endereco.cep')" formControlName="cep" type="number" id="cep" 
+                    name="cep" class="form-control" (blur)="consultaCEP()">
+                <app-campo-control-erro [mostrarErro]="verificaValidTouched('endereco.cep')" msgErro="CEP é obrigatório"></app-campo-control-erro>
             </div>
             <div class="col-md-3">
                 <label for="numero" class="control-label">Número</label>
-                <input [ngClass]="aplicaCssErro('numero')" formControlName="numero" type="number" id="numero" class="form-control">
-                <app-campo-control-erro [mostrarErro]="verificaValidTouched('numero')" msgErro="Número é obrigatório"></app-campo-control-erro>
+                <input [ngClass]="aplicaCssErro('endereco.numero')" formControlName="numero" type="number" id="numero" class="form-control">
+                <app-campo-control-erro [mostrarErro]="verificaValidTouched('endereco.numero')" msgErro="Número é obrigatório"></app-campo-control-erro>
             </div>
 
             <div class="col-md-6">
@@ -38,8 +39,8 @@
                     <label for="rua">Rua</label>
                 </div>
                 <div class="col-sm-12">
-                    <input [ngClass]="aplicaCssErro('rua')" formControlName="rua" type="text" class="form-control" name="rua" readonly>
-                    <app-campo-control-erro [mostrarErro]="verificaValidTouched('rua')" msgErro="Rua é obrigatório"></app-campo-control-erro>
+                    <input [ngClass]="aplicaCssErro('endereco.rua')" formControlName="rua" type="text" class="form-control" name="rua" readonly>
+                    <app-campo-control-erro [mostrarErro]="verificaValidTouched('endereco.rua')" msgErro="Rua é obrigatório"></app-campo-control-erro>
                 </div>
             </div>
         </div>
@@ -47,20 +48,20 @@
         <div class="form-group row">
             <div class="col-md-5">
                 <label for="bairro" class="control-label">Bairro</label>
-                <input [ngClass]="aplicaCssErro('bairro')" formControlName="bairro" type="text" id="bairro" name="bairro" class="form-control">
-                <app-campo-control-erro [mostrarErro]="verificaValidTouched('bairro')" msgErro="Bairro é obrigatório"></app-campo-control-erro>
+                <input [ngClass]="aplicaCssErro('endereco.bairro')" formControlName="bairro" type="text" id="bairro" name="bairro" class="form-control">
+                <app-campo-control-erro [mostrarErro]="verificaValidTouched('endereco.bairro')" msgErro="Bairro é obrigatório"></app-campo-control-erro>
             </div>
 
             <div class="col-md-4">
                 <label for="cidade" class="control-label">Cidade</label>
-                <input [ngClass]="aplicaCssErro('cidade')" formControlName="cidade" type="text" id="cidade" name="cidade" class="form-control">
-                <app-campo-control-erro [mostrarErro]="verificaValidTouched('cidade')" msgErro="Cidade é obrigatório"></app-campo-control-erro>
+                <input [ngClass]="aplicaCssErro('endereco.cidade')" formControlName="cidade" type="text" id="cidade" name="cidade" class="form-control">
+                <app-campo-control-erro [mostrarErro]="verificaValidTouched('endereco.cidade')" msgErro="Cidade é obrigatório"></app-campo-control-erro>
             </div>
 
             <div class="col-md-3">
                 <label for="estado" class="control-label">Estado</label>
-                <input [ngClass]="aplicaCssErro('estado')" formControlName="estado" type="text" id="estado" name="estado" class="form-control">
-                <app-campo-control-erro [mostrarErro]="verificaValidTouched('estado')" msgErro="Estado é obrigatório"></app-campo-control-erro>
+                <input [ngClass]="aplicaCssErro('endereco.estado')" formControlName="estado" type="text" id="estado" name="estado" class="form-control">
+                <app-campo-control-erro [mostrarErro]="verificaValidTouched('endereco.estado')" msgErro="Estado é obrigatório"></app-campo-control-erro>
             </div>
 
         </div>

@@ -29,13 +29,17 @@ export class DataFormComponent implements OnInit {
         ],
       ],
       email: [null, [Validators.required, Validators.email]],
-      cep: [null, Validators.required],
-      numero: [null, Validators.required],
-      complemento: [null],
-      rua: [null, Validators.required],
-      bairro: [null, Validators.required],
-      cidade: [null, Validators.required],
-      estado: [null, Validators.required]
+
+      endereco: this.formBuilder.group({
+        cep: [null, Validators.required],
+        numero: [null, Validators.required],
+        complemento: [null],
+        rua: [null, Validators.required],
+        bairro: [null, Validators.required],
+        cidade: [null, Validators.required],
+        estado: [null, Validators.required]
+
+      })
     });
   }
 
@@ -45,8 +49,6 @@ export class DataFormComponent implements OnInit {
       .subscribe(
         (dados) => {
           console.log(dados);
-
-          //this.resetar();
         },
         (error: any) => alert('erro')
       );
@@ -65,5 +67,47 @@ export class DataFormComponent implements OnInit {
     return {
       'alert alert-danger': this.verificaValidTouched(campo),
     }
+  }
+
+  consultaCEP() {
+    let cep = this.formulario.get('endereco.cep').value
+
+    cep => {cep.replace(/\D/g, '');} 
+
+    if (cep != '') {
+      var validacep = /^[0-9]{8}$/;
+
+      if (validacep.test(cep)) {
+        this.resetaDadosForm();
+        this.http
+          .get(`//viacep.com.br/ws/${cep}/json`)
+          .pipe(map((dados) => dados))
+          .subscribe((dados) => this.populaDadosForm(dados));
+      }
+    }
+  }
+
+  populaDadosForm(dados) {
+    this.formulario.patchValue({
+      endereco: {
+        rua: dados.logradouro,
+        complemento: dados.complemento,
+        bairro: dados.bairro,
+        cidade: dados.localidade,
+        estado: dados.uf,
+      },
+    });
+  }
+
+  resetaDadosForm() {
+    this.formulario.patchValue({
+      endereco: {
+        rua: null,
+        complemento: null,
+        bairro: null,
+        cidade: null,
+        estado: null,
+      },
+    });
   }
 }
